@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maya Clark — Environmental GIS Analyst</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Fraunces:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:      #0f0e0c;
+      --paper:    #f7f4ef;
+      --moss:     #3d6b4f;
+      --sage:     #7aaa8a;
+      --sky:      #3b7abf;
+      --solar:    #e8c12a;
+      --coral:    #e85d3a;
+      --lavender: #9b7fc7;
+      --teal:     #2a9d8f;
+      --cream:    #fdf8f0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem;
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .nav-name {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: -0.01em;
+      color: var(--solar);
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--paper);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--ink);
+      color: var(--paper);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 4rem 4rem;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: var(--moss);
+      opacity: 0.18;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: 30%;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: var(--sky);
+      opacity: 0.12;
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 1.25rem;
+    }
+    .hero-headline {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--solar);
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      opacity: 0.75;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--coral);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.03em;
+      padding: 0.85rem 1.75rem;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .hero-cta:hover { background: #c94e2f; transform: translateY(-1px); }
+
+    .hero-stats {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      padding: 1.5rem;
+      transition: background 0.2s;
+    }
+    .stat-card:hover { background: rgba(255,255,255,0.09); }
+    .stat-card:nth-child(1) { border-top: 3px solid var(--sage); }
+    .stat-card:nth-child(2) { border-top: 3px solid var(--solar); }
+    .stat-card:nth-child(3) { border-top: 3px solid var(--sky); }
+    .stat-card:nth-child(4) { border-top: 3px solid var(--coral); }
+    .stat-number {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 2.4rem;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      opacity: 0.55;
+    }
+
+    /* ── SECTION SHELL ── */
+    .section { padding: 6rem 4rem; }
+    .section-alt { background: var(--cream); }
+    .section-dark { background: var(--ink); color: var(--paper); }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-intro {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      max-width: 600px;
+      opacity: 0.7;
+      margin-bottom: 3.5rem;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-body { font-size: 1rem; line-height: 1.85; }
+    .about-body p + p { margin-top: 1.25rem; }
+    .about-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+    .chip {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border-radius: 2px;
+    }
+    .chip-moss    { background: #d4e8db; color: var(--moss); }
+    .chip-sky     { background: #d0e4f5; color: #1e5a9a; }
+    .chip-solar   { background: #fdf0a8; color: #7a620a; }
+    .chip-lavender{ background: #e8e0f5; color: #6a509a; }
+    .chip-teal    { background: #c8ede9; color: #1a6b60; }
+    .chip-coral   { background: #fad9d0; color: #9a3520; }
+
+    .about-awards { display: flex; flex-direction: column; gap: 1.25rem; }
+    .award-card {
+      border-left: 3px solid var(--solar);
+      padding: 1rem 1.25rem;
+      background: var(--paper);
+      border-radius: 0 4px 4px 0;
+    }
+    .award-card.moss  { border-left-color: var(--sage); }
+    .award-card.sky   { border-left-color: var(--sky); }
+    .award-card.coral { border-left-color: var(--coral); }
+    .award-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.25rem; }
+    .award-meta  { font-size: 0.8rem; opacity: 0.55; }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--paper);
+      border: 1px solid rgba(15,14,12,0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(15,14,12,0.12);
+    }
+    .project-color-bar { height: 6px; }
+    .project-body { padding: 1.5rem; }
+    .project-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.45;
+      margin-bottom: 0.6rem;
+    }
+    .project-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+    }
+    .project-desc {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      opacity: 0.65;
+      margin-bottom: 1.25rem;
+    }
+    .project-tools { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tool-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      background: rgba(15,14,12,0.06);
+      border-radius: 2px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── SERVICES ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      padding: 2rem;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: background 0.2s;
+    }
+    .service-card:hover { background: rgba(255,255,255,0.1); }
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .service-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 0.65rem;
+    }
+    .service-desc { font-size: 0.88rem; line-height: 1.7; opacity: 0.6; }
+
+    /* ── CONTACT ── */
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .contact-body {
+      font-size: 1rem;
+      line-height: 1.8;
+      opacity: 0.75;
+      margin-bottom: 2rem;
+    }
+    .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.75rem;
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.15s;
+    }
+    .contact-link:hover { color: var(--moss); }
+    .contact-link-icon {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 2px;
+      font-size: 1rem;
+    }
+    .contact-big {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .contact-big strong { font-weight: 700; font-style: normal; color: var(--moss); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: var(--paper);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      opacity: 0.5;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem; }
+      .nav-links { gap: 1.25rem; }
+      .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 3rem; }
+      .section { padding: 4rem 1.5rem; }
+      .about-grid, .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-name">Maya Clark</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Work</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Environmental GIS Analyst · Grant Writer · Land Advocate</p>
+      <h1 class="hero-headline">
+        Mapping the data<br>that <em>protects</em><br>our planet.
+      </h1>
+      <p class="hero-sub">
+        I combine geospatial analysis, environmental research, and grant writing to help nonprofits, farms, and advocacy organizations turn complex data into real-world action.
+      </p>
+      <a href="#contact" class="hero-cta">Work with me →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-number" style="color: var(--sage)">NASA</div>
+        <div class="stat-label">DEVELOP Team Lead, Goddard Space Flight Center</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" style="color: var(--solar)">$5K</div>
+        <div class="stat-label">Research grant, Towson University</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" style="color: var(--sky)">12</div>
+        <div class="stat-label">Countries analyzed, West Africa fisheries project</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" style="color: var(--coral)">$250</div>
+        <div class="stat-label">Award-winning research paper</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section section-alt" id="about">
+    <p class="section-label" style="color: var(--moss)">About me</p>
+    <h2 class="section-title">Geographer, analyst,<br>and land advocate.</h2>
+    <div class="about-grid">
+      <div>
+        <div class="about-body">
+          <p>I'm Maya Clark — a geospatial analyst and environmental researcher based in West Virginia with a B.S. in Geography and Environmental Planning (GIS minor) from Towson University. My work lives at the intersection of satellite data, watershed science, and community land stewardship.</p>
+          <p>I've led remote sensing projects at NASA's Goddard Space Flight Center, analyzed oil slick detections for SkyTruth, mapped fisheries data across 12 West African nations for CIEL, and monitored Chesapeake Bay ecosystems for the Chesapeake Bay Foundation. I'm also rooted in regenerative agriculture — helping grow Sacred Roots Herbal Sanctuary in Shepherdstown, WV.</p>
+          <p>Whether you need a watershed delineation, a grant proposal, or a map that makes your data sing — I can help.</p>
+        </div>
+        <div class="about-chips">
+          <span class="chip chip-moss">ArcGIS Pro</span>
+          <span class="chip chip-sky">Google Earth Engine</span>
+          <span class="chip chip-solar">R / dataRetrieval</span>
+          <span class="chip chip-lavender">Python</span>
+          <span class="chip chip-teal">QGIS</span>
+          <span class="chip chip-coral">Remote Sensing</span>
+          <span class="chip chip-moss">Watershed Analysis</span>
+          <span class="chip chip-sky">Grant Writing</span>
+          <span class="chip chip-solar">Data Visualization</span>
+          <span class="chip chip-lavender">InSAR</span>
+          <span class="chip chip-teal">NHD / DEM</span>
+          <span class="chip chip-coral">Project Management</span>
+        </div>
+      </div>
+      <div class="about-awards">
+        <div class="award-card">
+          <div class="award-title">B.S. Geography & Environmental Planning, GIS Minor</div>
+          <div class="award-meta">Towson University · May 2026</div>
+        </div>
+        <div class="award-card moss">
+          <div class="award-title">NASA DEVELOP Team Lead</div>
+          <div class="award-meta">Goddard Space Flight Center · Remote Sensing Research</div>
+        </div>
+        <div class="award-card sky">
+          <div class="award-title">$5,000 Research Grant</div>
+          <div class="award-meta">Towson University · Geospatial Research Award</div>
+        </div>
+        <div class="award-card">
+          <div class="award-title">$250 Award-Winning Research Paper</div>
+          <div class="award-meta">Academic Excellence in Environmental Geography</div>
+        </div>
+        <div class="award-card coral">
+          <div class="award-title">GIS Intern</div>
+          <div class="award-meta">Chesapeake Bay Foundation · Watershed & Ecosystem Mapping</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <p class="section-label" style="color: var(--coral)">Selected work</p>
+    <h2 class="section-title">Projects that move the needle.</h2>
+    <p class="section-intro">From satellite imagery to advocacy maps to farm stewardship — each project combines technical rigor with environmental purpose.</p>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-color-bar" style="background: var(--sage)"></div>
+        <div class="project-body">
+          <p class="project-tag">NASA DEVELOP · Remote Sensing</p>
+          <h3 class="project-title">Land & Water Resource Monitoring from Space</h3>
+          <p class="project-desc">Led a NASA DEVELOP team at Goddard Space Flight Center applying satellite remote sensing to real-world environmental challenges. Coordinated research design, data processing, and deliverables for partner organizations.</p>
+          <div class="project-tools">
+            <span class="tool-tag">Google Earth Engine</span>
+            <span class="tool-tag">ArcGIS Pro</span>
+            <span class="tool-tag">Remote Sensing</span>
+            <span class="tool-tag">Team Lead</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-color-bar" style="background: var(--sky)"></div>
+        <div class="project-body">
+          <p class="project-tag">SkyTruth · Oil Pollution Detection</p>
+          <h3 class="project-title">Cerulean API Oil Slick Detection Pipeline</h3>
+          <p class="project-desc">Built and debugged an automated pipeline querying the Cerulean API for satellite-detected oil slicks by vessel MMSI. Resolved complex API challenges and delivered clean geospatial datasets for environmental accountability.</p>
+          <div class="project-tools">
+            <span class="tool-tag">Python</span>
+            <span class="tool-tag">Cerulean API</span>
+            <span class="tool-tag">GeoPandas</span>
+            <span class="tool-tag">SAR Imagery</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-color-bar" style="background: var(--coral)"></div>
+        <div class="project-body">
+          <p class="project-tag">CIEL · Fisheries Advocacy</p>
+          <h3 class="project-title">West Africa Fisheries Data Atlas</h3>
+          <p class="project-desc">Compiled and visualized Sea Around Us catch data across 12 West African nations for 4 key species. Produced choropleth and bubble maps using Marine Regions EEZ polygons — supporting advocacy against offshore oil expansion ahead of a major Cabo Verde conference.</p>
+          <div class="project-tools">
+            <span class="tool-tag">R</span>
+            <span class="tool-tag">ggplot2</span>
+            <span class="tool-tag">Sea Around Us</span>
+            <span class="tool-tag">EEZ polygons</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-color-bar" style="background: var(--teal)"></div>
+        <div class="project-body">
+          <p class="project-tag">Chesapeake Bay Foundation · Watershed GIS</p>
+          <h3 class="project-title">Bay Ecosystem & Watershed Mapping</h3>
+          <p class="project-desc">Applied GIS analysis to support monitoring and advocacy for one of North America's most complex estuarine systems. Developed spatial datasets supporting CBF's conservation and policy work across the Chesapeake watershed.</p>
+          <div class="project-tools">
+            <span class="tool-tag">ArcGIS Pro</span>
+            <span class="tool-tag">Watershed Analysis</span>
+            <span class="tool-tag">Environmental Monitoring</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-color-bar" style="background: var(--lavender)"></div>
+        <div class="project-body">
+          <p class="project-tag">SkyTruth · Water Quality Research</p>
+          <h3 class="project-title">Data Center Water Quality Impact Study</h3>
+          <p class="project-desc">Leading a feasibility sprint assessing whether ambient water quality monitoring data can detect pollution signals near data centers. Includes DEM-based watershed delineation, upstream/downstream gage pair identification, and spatial analysis in ArcGIS Pro.</p>
+          <div class="project-tools">
+            <span class="tool-tag">R / dataRetrieval</span>
+            <span class="tool-tag">ArcGIS Pro</span>
+            <span class="tool-tag">DEM / NHD</span>
+            <span class="tool-tag">PNNL IM3 Atlas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-color-bar" style="background: var(--solar)"></div>
+        <div class="project-body">
+          <p class="project-tag">Sacred Roots Herbal Sanctuary · Regenerative Agriculture</p>
+          <h3 class="project-title">Farm Mapping & Grant Strategy</h3>
+          <p class="project-desc">Applying GIS to map growing zones, habitat corridors, and water resources at a medicinal herb farm in Shepherdstown, WV. Simultaneously developing a grant funding strategy targeting USDA SARE, NRCS, and WV agricultural programs.</p>
+          <div class="project-tools">
+            <span class="tool-tag">ArcGIS Pro</span>
+            <span class="tool-tag">Grant Writing</span>
+            <span class="tool-tag">USDA Programs</span>
+            <span class="tool-tag">Regenerative Ag</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section section-dark" id="services">
+    <p class="section-label" style="color: var(--sage)">What I offer</p>
+    <h2 class="section-title" style="color: var(--paper)">One integrated practice.<br>Four ways to help.</h2>
+    <p class="section-intro">I work with environmental nonprofits, small farms, advocacy organizations, and consulting firms — fully remote, fully flexible.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon">🗺️</span>
+        <h3 class="service-title">Geospatial Analysis</h3>
+        <p class="service-desc">Watershed delineation, land use mapping, habitat analysis, pollution detection, site suitability — delivered as maps, reports, or data packages your team can use.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🛰️</span>
+        <h3 class="service-title">Remote Sensing & Monitoring</h3>
+        <p class="service-desc">Satellite-based environmental monitoring using Google Earth Engine, ArcGIS, and InSAR. I specialize in water quality, land change detection, and agricultural applications.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">📋</span>
+        <h3 class="service-title">Grant Research & Writing</h3>
+        <p class="service-desc">Grant opportunity research and proposal drafting for environmental, agricultural, and conservation organizations — with a focus on USDA, federal, and foundation sources.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">📊</span>
+        <h3 class="service-title">Environmental Data Storytelling</h3>
+        <p class="service-desc">Turning complex datasets into compelling visualizations, reports, and advocacy materials. R, Python, and ArcGIS — built for audiences who need to act on what the data shows.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section section-alt" id="contact">
+    <div class="contact-wrap">
+      <div>
+        <p class="section-label" style="color: var(--coral)">Get in touch</p>
+        <p class="contact-big">Let's put your data<br>to work for the <strong>land.</strong></p>
+        <p class="contact-body" style="margin-top:1.5rem">I take on a small number of remote clients at a time — GIS retainers, grant projects, and data analysis packages. Reach out and let's talk about what you're working on.</p>
+        <div class="contact-links">
+          <a href="mailto:hello@mayanclark.com" class="contact-link">
+            <span class="contact-link-icon" style="background:#fad9d0">📧</span>
+            hello@mayanclark.com
+          </a>
+          <a href="https://github.com/mayanclark" class="contact-link" target="_blank" rel="noopener">
+            <span class="contact-link-icon" style="background:#e8e0f5">🐙</span>
+            github.com/mayanclark
+          </a>
+          <a href="https://linkedin.com/in/mayanclark" class="contact-link" target="_blank" rel="noopener">
+            <span class="contact-link-icon" style="background:#d0e4f5">💼</span>
+            linkedin.com/in/mayanclark
+          </a>
+        </div>
+      </div>
+      <div style="background: var(--paper); border-radius: 4px; padding: 2.5rem; border: 1px solid rgba(15,14,12,0.1);">
+        <p style="font-family:'Fraunces',serif; font-size:1.1rem; font-weight:700; margin-bottom:1.5rem;">What clients get</p>
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+          <div style="display:flex; gap:0.75rem; align-items:flex-start;">
+            <span style="color:var(--moss); font-weight:700; margin-top:2px;">✓</span>
+            <div>
+              <div style="font-weight:600; font-size:0.9rem;">Fully async & remote</div>
+              <div style="font-size:0.82rem; opacity:0.55; margin-top:2px;">Deliverable-based, no meeting overload</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:0.75rem; align-items:flex-start;">
+            <span style="color:var(--moss); font-weight:700; margin-top:2px;">✓</span>
+            <div>
+              <div style="font-weight:600; font-size:0.9rem;">NASA & nonprofit-grade rigor</div>
+              <div style="font-size:0.82rem; opacity:0.55; margin-top:2px;">Real research experience, not just software skills</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:0.75rem; align-items:flex-start;">
+            <span style="color:var(--moss); font-weight:700; margin-top:2px;">✓</span>
+            <div>
+              <div style="font-weight:600; font-size:0.9rem;">Mission-aligned work only</div>
+              <div style="font-size:0.82rem; opacity:0.55; margin-top:2px;">I work with orgs whose values I share</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:0.75rem; align-items:flex-start;">
+            <span style="color:var(--moss); font-weight:700; margin-top:2px;">✓</span>
+            <div>
+              <div style="font-weight:600; font-size:0.9rem;">Flat-rate project packages</div>
+              <div style="font-size:0.82rem; opacity:0.55; margin-top:2px;">Transparent scope, no hourly billing surprises</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Maya Clark · Environmental GIS Analyst · mayanclark.github.io
+  </footer>
+
+</body>
+</html>
