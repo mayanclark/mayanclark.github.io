@@ -1,367 +1,568 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Maya Clark | Environmental Project Management & GIS Consulting</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Maya Clark — Environmental Project Management &amp; GIS Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:ital,wght@0,300;0,600;0,900;1,300;1,500;1,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-scroll-behavior:smooth;
-}
-
-body{
-
-font-family:Inter,sans-serif;
-background:#F7F6F2;
-color:#243327;
-line-height:1.8;
-
-}
-
-img{
-
-max-width:100%;
-display:block;
-
-}
-
-a{
-
-text-decoration:none;
-
-}
-
-section{
-
-padding:90px 10%;
-
-}
-
-.container{
-
-max-width:1300px;
-margin:auto;
-
-}
-
-h1,h2,h3{
-
-font-family:Fraunces,serif;
-font-weight:600;
-line-height:1.2;
-
-}
-
-h1{
-
-font-size:4.3rem;
-
-}
-
-h2{
-
-font-size:2.8rem;
-margin-bottom:20px;
-
-}
-
-p{
-
-font-size:1.05rem;
-color:#48544a;
-
-}
-
-nav{
-
-position:fixed;
-top:0;
-left:0;
-width:100%;
-padding:22px 9%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:rgba(247,246,242,.92);
-backdrop-filter:blur(12px);
-z-index:1000;
-border-bottom:1px solid #e4e4df;
-
-}
-
-.logo{
-
-font-family:Fraunces,serif;
-font-size:1.5rem;
-font-weight:700;
-color:#2D4632;
-
-}
-
-nav ul{
-
-display:flex;
-gap:40px;
-list-style:none;
-
-}
-
-nav a{
-
-color:#304236;
-font-weight:500;
-transition:.3s;
-
-}
-
-nav a:hover{
-
-color:#6A8F63;
-
-}
-
-.hero{
-
-padding-top:170px;
-padding-bottom:120px;
-
-background:
-
-linear-gradient(
-rgba(247,246,242,.82),
-rgba(247,246,242,.93)
-),
-
-url("images/hero.jpg");
-
-background-size:cover;
-background-position:center;
-
-}
-
-.hero-content{
-
-max-width:760px;
-
-}
-
-.eyebrow{
-
-letter-spacing:2px;
-text-transform:uppercase;
-font-size:.85rem;
-font-weight:600;
-color:#6A8F63;
-margin-bottom:25px;
-
-}
-
-.hero h1{
-
-margin-bottom:30px;
-
-}
-
-.hero p{
-
-font-size:1.2rem;
-margin-bottom:40px;
-
-}
-
-.buttons{
-
-display:flex;
-gap:20px;
-margin-top:40px;
-
-}
-
-.btn{
-
-padding:16px 34px;
-border-radius:8px;
-font-weight:600;
-transition:.3s;
-
-}
-
-.primary{
-
-background:#365B3D;
-color:white;
-
-}
-
-.primary:hover{
-
-background:#2C4B33;
-
-}
-
-.secondary{
-
-border:2px solid #365B3D;
-color:#365B3D;
-
-}
-
-.secondary:hover{
-
-background:#365B3D;
-color:white;
-
-}
-
-.stats{
-
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:25px;
-margin-top:80px;
-
-}
-
-.stat{
-
-background:white;
-padding:30px;
-border-radius:16px;
-box-shadow:0 10px 30px rgba(0,0,0,.05);
-
-}
-
-.stat h3{
-
-font-size:2rem;
-margin-bottom:10px;
-
-}
-
-.stat p{
-
-font-size:.95rem;
-
-}
-
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+
+  :root{
+    --bg:        #0e211a;
+    --bg-raise:  #143024;
+    --bg-raise2: #1b3c2c;
+    --paper:     #f4f1e6;
+    --muted:     rgba(244,241,230,0.6);
+    --muted2:    rgba(244,241,230,0.36);
+    --line:      rgba(244,241,230,0.13);
+    --accent:    #cf9d3a;      /* thermal / topo-contour amber */
+    --accent-soft: rgba(207,157,58,0.14);
+    --moss:      #74886a;      /* muted field green, secondary only */
+  }
+
+  body{
+    font-family:'Space Grotesk',sans-serif;
+    background:var(--bg);
+    color:var(--paper);
+    font-size:16px;
+    line-height:1.6;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;}
+
+  /* ───────────────────── NAV ───────────────────── */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:1.1rem 2.75rem;
+    background:rgba(14,33,26,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-left{display:flex;align-items:center;gap:0.85rem;}
+  .nav-mark{
+    width:32px;height:32px;border-radius:50%;
+    border:1.5px solid var(--accent);position:relative;flex-shrink:0;
+  }
+  .nav-mark::before{
+    content:'';position:absolute;inset:6px;border-radius:50%;border:1px solid var(--accent);opacity:0.55;
+  }
+  .nav-mark::after{
+    content:'';position:absolute;top:50%;left:50%;width:3px;height:3px;
+    background:var(--accent);border-radius:50%;transform:translate(-50%,-50%);
+  }
+  .nav-name{font-family:'Fraunces',serif;font-weight:600;font-size:1.02rem;letter-spacing:0.01em;}
+  .nav-tag{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted2);display:block;margin-top:0.15rem;}
+  .nav-links{display:flex;gap:2.1rem;list-style:none;}
+  .nav-links a{
+    text-decoration:none;font-size:0.72rem;font-weight:600;letter-spacing:0.09em;
+    text-transform:uppercase;font-family:'IBM Plex Mono',monospace;
+    color:var(--muted);position:relative;padding-bottom:3px;transition:color 0.2s;
+  }
+  .nav-links a::after{
+    content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--accent);
+    transform:scaleX(0);transform-origin:left;transition:transform 0.25s;
+  }
+  .nav-links a:hover{color:var(--paper);}
+  .nav-links a:hover::after{transform:scaleX(1);}
+
+  /* ───────────────── COORDINATE TICKER ───────────────── */
+  .ticker-wrap{
+    position:fixed;top:64px;left:0;right:0;z-index:99;
+    background:var(--bg-raise);border-bottom:1px solid var(--line);
+    overflow:hidden;white-space:nowrap;padding:0.5rem 0;
+  }
+  .ticker-track{
+    display:inline-flex;gap:3rem;animation:scroll-left 38s linear infinite;
+    font-family:'IBM Plex Mono',monospace;font-size:0.68rem;letter-spacing:0.05em;
+    color:var(--muted2);
+  }
+  .ticker-track span{color:var(--accent);}
+  @keyframes scroll-left{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ───────────────────── HERO ───────────────────── */
+  .hero{
+    min-height:94vh;position:relative;overflow:hidden;
+    display:grid;grid-template-columns:1.2fr 0.8fr;align-items:center;
+    padding:12rem 4rem 4rem;gap:3rem;
+  }
+  .hero-ghost{
+    position:absolute;top:8%;right:-3%;
+    font-family:'Fraunces',serif;font-weight:900;font-size:min(26vw,320px);
+    color:transparent;-webkit-text-stroke:1px rgba(244,241,230,0.06);
+    line-height:1;user-select:none;pointer-events:none;z-index:0;
+  }
+  .hero-text{position:relative;z-index:1;}
+  .hero-eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:0.72rem;font-weight:600;
+    letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem;
+    display:flex;align-items:center;gap:0.6rem;
+  }
+  .hero-eyebrow::before{content:'';width:22px;height:1px;background:var(--accent);}
+  .hero-headline{
+    font-family:'Fraunces',serif;font-weight:300;font-style:italic;
+    font-size:clamp(2.3rem,4.4vw,3.75rem);line-height:1.14;letter-spacing:-0.01em;
+    margin-bottom:1.6rem;
+  }
+  .hero-headline strong{font-weight:900;font-style:normal;color:var(--paper);}
+  .hero-sub{font-size:1.03rem;line-height:1.85;color:var(--muted);max-width:520px;margin-bottom:2.5rem;}
+  .hero-actions{display:flex;align-items:center;gap:1.75rem;flex-wrap:wrap;}
+  .btn-primary{
+    display:inline-flex;align-items:center;gap:0.5rem;
+    background:var(--paper);color:var(--bg);text-decoration:none;
+    font-weight:700;font-size:0.85rem;letter-spacing:0.02em;
+    padding:0.95rem 1.9rem;border-radius:2px;border:1.5px solid var(--paper);
+    transition:background 0.2s,color 0.2s,transform 0.15s;
+  }
+  .btn-primary:hover{background:transparent;color:var(--paper);transform:translateY(-1px);}
+  .play-cluster{display:flex;align-items:center;gap:0.9rem;text-decoration:none;}
+  .play-ring{
+    width:52px;height:52px;border-radius:50%;border:1.5px solid var(--line);
+    display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;
+    transition:border-color 0.2s;
+  }
+  .play-ring::before{
+    content:'';position:absolute;inset:-6px;border-radius:50%;border:1px solid var(--accent);
+    opacity:0;transition:opacity 0.2s;
+  }
+  .play-cluster:hover .play-ring::before{opacity:0.55;}
+  .play-cluster:hover .play-ring{border-color:var(--accent);}
+  .play-ring svg{width:14px;height:14px;fill:var(--paper);}
+  .play-label{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);line-height:1.5;}
+  .play-label b{color:var(--paper);display:block;font-size:0.74rem;}
+
+  .hero-credentials{position:relative;z-index:1;display:flex;flex-direction:column;gap:0;}
+  .cred-row{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:1.15rem 0;border-bottom:1px solid var(--line);gap:1rem;
+  }
+  .cred-row:first-child{padding-top:0;}
+  .cred-org{font-family:'Fraunces',serif;font-weight:900;font-size:1.15rem;flex-shrink:0;}
+  .cred-detail{text-align:right;}
+  .cred-role{font-size:0.78rem;color:var(--muted);line-height:1.5;}
+  .cred-date{font-family:'IBM Plex Mono',monospace;font-size:0.63rem;letter-spacing:0.06em;color:var(--muted2);text-transform:uppercase;margin-top:0.3rem;}
+
+  /* ───────────────── TRUSTED STRIP ───────────────── */
+  .trusted{
+    padding:1.85rem 4rem;background:var(--bg-raise);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap;
+  }
+  .trusted-label{font-family:'IBM Plex Mono',monospace;font-size:0.66rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted2);white-space:nowrap;}
+  .trusted-marks{display:flex;gap:2.75rem;flex-wrap:wrap;}
+  .trusted-mark{font-family:'Fraunces',serif;font-weight:600;font-size:0.98rem;color:var(--muted);letter-spacing:0.01em;}
+
+  /* ───────────────── SECTION SHELL ───────────────── */
+  .section{padding:6.5rem 4rem;}
+  .section-label{
+    font-family:'IBM Plex Mono',monospace;font-size:0.7rem;font-weight:600;
+    letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:0.8rem;
+  }
+  .section-title{
+    font-family:'Fraunces',serif;font-weight:900;font-size:clamp(1.85rem,3.2vw,2.55rem);
+    line-height:1.16;letter-spacing:-0.02em;margin-bottom:1.1rem;
+  }
+  .section-title em{font-style:italic;font-weight:300;color:var(--muted);}
+  .section-intro{font-size:0.98rem;line-height:1.85;max-width:600px;color:var(--muted);}
+
+  /* ───────────────── CASE STUDIES / FIELD WORK ───────────────── */
+  .work-head{
+    display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:2rem;margin-bottom:3rem;
+  }
+  .filter-tabs{display:flex;gap:1.75rem;flex-wrap:wrap;}
+  .filter-tab{
+    background:none;border:none;cursor:pointer;
+    font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.05em;
+    color:var(--muted2);padding-bottom:0.5rem;border-bottom:2px solid transparent;
+    transition:color 0.2s,border-color 0.2s;
+  }
+  .filter-tab sup{font-size:0.62em;opacity:0.7;}
+  .filter-tab.active,.filter-tab:hover{color:var(--paper);border-color:var(--accent);}
+
+  .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;}
+  .project-card{
+    background:var(--bg-raise);border:1px solid var(--line);border-radius:2px;
+    overflow:hidden;display:flex;flex-direction:column;
+    transition:transform 0.2s,border-color 0.2s;
+  }
+  .project-card:hover{transform:translateY(-3px);border-color:rgba(207,157,58,0.4);}
+  .project-card.hidden{display:none;}
+  .project-card.feature{grid-column:1/-1;flex-direction:row;}
+  .project-card.feature .project-visual{width:52%;}
+  .project-card.feature .project-body{width:48%;}
+
+  .project-visual{position:relative;height:280px;overflow:hidden;}
+  .pv-scene{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.7rem;padding:1.5rem;text-align:center;position:relative;}
+  .pv-scene::after{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,rgba(0,0,0,0.12) 4px);
+    mix-blend-mode:multiply;opacity:0.5;
+  }
+  .pv-icon{font-size:2.6rem;filter:grayscale(0.2);position:relative;z-index:1;}
+  .pv-title{font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;color:var(--paper);line-height:1.3;position:relative;z-index:1;}
+  .pv-sub{font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:rgba(244,241,230,0.5);line-height:1.6;max-width:280px;position:relative;z-index:1;}
+  .project-tag{
+    position:absolute;top:0.9rem;left:0.9rem;z-index:2;
+    font-family:'IBM Plex Mono',monospace;font-size:0.62rem;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;
+    padding:0.32rem 0.75rem;border-radius:2px;background:rgba(14,33,26,0.7);border:1px solid var(--accent);color:var(--accent);
+    backdrop-filter:blur(4px);
+  }
+
+  .project-body{padding:1.85rem 2rem;display:flex;flex-direction:column;flex:1;}
+  .project-role{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--muted2);margin-bottom:0.6rem;letter-spacing:0.03em;}
+  .project-title{font-family:'Fraunces',serif;font-weight:900;font-size:1.22rem;line-height:1.3;margin-bottom:1rem;}
+  .cs-row{display:flex;gap:0.7rem;font-size:0.85rem;line-height:1.65;margin-bottom:0.65rem;}
+  .cs-label{flex-shrink:0;font-family:'IBM Plex Mono',monospace;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;font-size:0.62rem;color:var(--accent);width:66px;padding-top:0.2rem;}
+  .cs-value{color:var(--muted);flex:1;}
+  .project-links{display:flex;gap:0.85rem;flex-wrap:wrap;margin-top:1.1rem;}
+  .link-arrow{
+    font-family:'IBM Plex Mono',monospace;font-size:0.74rem;font-weight:500;text-decoration:none;
+    color:var(--paper);border-bottom:1px solid var(--accent);padding-bottom:2px;transition:opacity 0.2s;
+  }
+  .link-arrow:hover{opacity:0.7;}
+
+  @media (max-width:900px){
+    .projects-grid{grid-template-columns:1fr;}
+    .project-card.feature{flex-direction:column;}
+    .project-card.feature .project-visual,.project-card.feature .project-body{width:100%;}
+  }
+
+  /* ───────────────── SERVICES ───────────────── */
+  .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .svc{padding:2rem 1.6rem;background:var(--bg);transition:background 0.2s;}
+  .svc:hover{background:var(--bg-raise);}
+  .svc-num{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--accent);margin-bottom:1.2rem;}
+  .svc-title{font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem;margin-bottom:0.6rem;}
+  .svc-desc{font-size:0.83rem;line-height:1.75;color:var(--muted);}
+
+  /* ───────────────── APPROACH ───────────────── */
+  .approach-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+  .philosophy-body{font-size:1.02rem;line-height:1.9;color:var(--muted);}
+  .philosophy-body p+p{margin-top:1.1rem;}
+  .approach-list{display:flex;flex-direction:column;}
+  .approach-item{display:flex;gap:1.25rem;padding:1.25rem 0;border-bottom:1px solid var(--line);}
+  .approach-item:first-child{padding-top:0;}
+  .approach-item:last-child{border-bottom:none;}
+  .approach-mark{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:0.9rem;color:var(--accent);flex-shrink:0;width:1.8rem;}
+  .approach-title{font-weight:700;font-size:0.96rem;margin-bottom:0.25rem;}
+  .approach-desc{font-size:0.85rem;color:var(--muted);line-height:1.65;}
+
+  /* ───────────────── ABOUT ───────────────── */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+  .about-body{font-size:0.97rem;line-height:1.9;color:var(--muted);}
+  .about-body p+p{margin-top:1.2rem;}
+  .about-body em{font-style:italic;color:var(--accent);}
+  .about-chips{display:flex;flex-wrap:wrap;gap:0.55rem;margin-top:1.8rem;}
+  .chip{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:500;letter-spacing:0.03em;padding:0.4rem 0.85rem;border-radius:2px;border:1px solid var(--line);color:var(--muted);}
+  .chip.on{border-color:var(--accent);color:var(--accent);}
+
+  .cred-list{display:flex;flex-direction:column;gap:0.65rem;}
+  .award-card{border-left:2px solid var(--accent);padding:1rem 1.3rem;background:var(--bg-raise);}
+  .award-card.dim{border-left-color:var(--line);}
+  .award-title{font-weight:700;font-size:0.9rem;margin-bottom:0.25rem;}
+  .award-meta{font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:var(--muted2);}
+
+  /* ───────────────── CONTACT ───────────────── */
+  .contact-wrap{max-width:720px;}
+  .contact-big{
+    font-family:'Fraunces',serif;font-weight:300;font-style:italic;
+    font-size:clamp(1.9rem,3.6vw,2.9rem);line-height:1.2;letter-spacing:-0.01em;color:var(--muted);
+  }
+  .contact-big strong{font-weight:900;font-style:normal;color:var(--paper);}
+  .contact-body{font-size:0.97rem;line-height:1.85;color:var(--muted);margin:1.6rem 0 2.2rem;}
+  .clink-list{display:flex;flex-direction:column;gap:0.6rem;}
+  .clink{
+    display:flex;align-items:center;gap:0.85rem;text-decoration:none;
+    font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:0.88rem;
+    padding:0.9rem 1.15rem;border-radius:2px;background:var(--bg-raise);border:1px solid var(--line);
+    transition:border-color 0.2s,color 0.2s;
+  }
+  .clink:hover{border-color:var(--accent);color:var(--accent);}
+  .clink-icon{width:18px;text-align:center;flex-shrink:0;opacity:0.8;}
+
+  footer{
+    background:var(--bg-raise);border-top:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.6rem 4rem;font-size:0.72rem;color:var(--muted2);
+    font-family:'IBM Plex Mono',monospace;
+  }
+  footer a{text-decoration:none;color:var(--muted);}
+  footer a:hover{color:var(--accent);}
+
+  @media (max-width:900px){
+    nav{padding:0.9rem 1.25rem;}
+    .nav-links li:nth-child(3),.nav-links li:nth-child(4){display:none;}
+    .ticker-wrap{top:60px;}
+    .hero{grid-template-columns:1fr;padding:9.5rem 1.5rem 3rem;gap:2.5rem;}
+    .hero-ghost{display:none;}
+    .trusted{padding:1.5rem;}
+    .section{padding:4rem 1.5rem;}
+    .about-grid,.approach-grid{grid-template-columns:1fr;gap:2.5rem;}
+    .services-grid{grid-template-columns:1fr 1fr;}
+    footer{padding:1.5rem;flex-direction:column;gap:0.5rem;text-align:center;}
+    .work-head{flex-direction:column;align-items:flex-start;}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
 </style>
-
 </head>
-
 <body>
 
-<nav>
-
-<div class="logo">
-
-Maya Clark
-
-</div>
-
-<ul>
-
-<li><a href="#work">Selected Work</a></li>
-
-<li><a href="#services">Services</a></li>
-
-<li><a href="#about">About</a></li>
-
-<li><a href="#contact">Connect</a></li>
-
-</ul>
-
+<nav aria-label="Site navigation">
+  <div class="nav-left">
+    <div class="nav-mark" aria-hidden="true"></div>
+    <div>
+      <a href="#" class="nav-name" style="text-decoration:none;">Maya Clark</a>
+      <span class="nav-tag">Environmental PM · GIS Consulting</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#field-work">Field Work</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </nav>
 
-<header class="hero">
-
-<div class="container">
-
-<div class="hero-content">
-
-<div class="eyebrow">
-
-Environmental Project Management • GIS Consulting • Community Impact
-
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack"></div>
 </div>
 
-<h1>
+<section class="hero" aria-label="Introduction">
+  <div class="hero-ghost">TERRAIN</div>
+  <div class="hero-text">
+    <p class="hero-eyebrow">Environmental Project Management · GIS Consulting</p>
+    <h1 class="hero-headline">Building healthier communities through<br><strong>better environmental decisions.</strong></h1>
+    <p class="hero-sub">I help nonprofits, agencies, and community organizations turn satellite data and geospatial analysis into decisions they can act on — bringing the project management, clear communication, and follow-through to see each one through to impact.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start a project →</a>
+      <a href="#field-work" class="play-cluster">
+        <span class="play-ring" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="play-label">View field work <b>05 case studies</b></span>
+      </a>
+    </div>
+  </div>
+  <div class="hero-credentials" aria-label="Highlights">
+    <div class="cred-row">
+      <span class="cred-org" style="color:var(--accent);">SkyTruth</span>
+      <div class="cred-detail"><div class="cred-role">Geospatial Intern · Monitoring &amp; Litigation Support</div><div class="cred-date">2025 – Present</div></div>
+    </div>
+    <div class="cred-row">
+      <span class="cred-org">Towson</span>
+      <div class="cred-detail"><div class="cred-role">$5,000 CLA Summer Research Grant</div><div class="cred-date">2025</div></div>
+    </div>
+    <div class="cred-row">
+      <span class="cred-org">CBF</span>
+      <div class="cred-detail"><div class="cred-role">GIS Intern · Chesapeake Bay Foundation</div><div class="cred-date">May – Aug 2025</div></div>
+    </div>
+    <div class="cred-row">
+      <span class="cred-org">NASA</span>
+      <div class="cred-detail"><div class="cred-role">DEVELOP Team Lead · Goddard Space Flight Center</div><div class="cred-date">Jan – Mar 2024</div></div>
+    </div>
+  </div>
+</section>
 
-Building healthier communities through better environmental decisions.
+<section class="section" id="field-work">
+  <div class="work-head">
+    <div>
+      <p class="section-label">Field work</p>
+      <h2 class="section-title">Projects, in the field<br><em>and on the map.</em></h2>
+    </div>
+    <div class="filter-tabs" id="filterTabs">
+      <button class="filter-tab active" data-filter="all">All <sup>(05)</sup></button>
+      <button class="filter-tab" data-filter="research">Research <sup>(01)</sup></button>
+      <button class="filter-tab" data-filter="skytruth">SkyTruth <sup>(01)</sup></button>
+      <button class="filter-tab" data-filter="cbf">Coastal <sup>(01)</sup></button>
+      <button class="filter-tab" data-filter="nasa">Remote Sensing <sup>(01)</sup></button>
+      <button class="filter-tab" data-filter="conservation">Conservation <sup>(01)</sup></button>
+    </div>
+  </div>
 
-</h1>
+  <div class="projects-grid" id="projectsGrid">
 
-<p>
+    <div class="project-card feature" data-cat="research">
+      <div class="project-visual">
+        <span class="project-tag">Independent Research</span>
+        <div class="pv-scene" style="background:linear-gradient(150deg,#0f160f 0%,#1d2c1a 55%,#0f160f 100%);">
+          <div class="pv-icon">🌳</div>
+          <div class="pv-title">Canopy in Crisis</div>
+          <div class="pv-sub">Baltimore's urban trees are disappearing — how can we respond?</div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-role">Principal Investigator · Towson University · 2025</div>
+        <h3 class="project-title">Where Baltimore's tree canopy is disappearing — and why</h3>
+        <div class="cs-row"><span class="cs-label">Challenge</span><span class="cs-value">Baltimore lacked a clear, data-backed account of who was losing tree canopy fastest, and why.</span></div>
+        <div class="cs-row"><span class="cs-label">Role</span><span class="cs-value">Designed, funded, and led the study independently, backed by a $5,000 CLA Summer Research Grant.</span></div>
+        <div class="cs-row"><span class="cs-label">Impact</span><span class="cs-value">Identified population density and vacant housing as the strongest predictors of a 17% canopy decline; awarded Best Paper at the AAG Mid-Atlantic Division Conference.</span></div>
+        <div class="project-links">
+          <a href="https://storymaps.arcgis.com/stories/3cf9e1414d3642a99772c9f7ba3f2c54" target="_blank" rel="noopener" class="link-arrow">View the StoryMap →</a>
+          <a href="https://www.towson.edu/cla/resources/documents/urbancanopyequity_mayaclark2025.pdf" target="_blank" rel="noopener" class="link-arrow">Read the paper →</a>
+        </div>
+      </div>
+    </div>
 
-I partner with nonprofits, local governments, universities, and mission-driven organizations to lead environmental projects, develop geospatial solutions, and communicate complex data in ways that support informed decisions. My work combines project management, GIS, environmental research, and collaborative leadership to help organizations create lasting community impact.
+    <div class="project-card" data-cat="skytruth">
+      <div class="project-visual">
+        <span class="project-tag">SkyTruth</span>
+        <div class="pv-scene" style="background:linear-gradient(150deg,#0e130f 0%,#1a2530 55%,#0e130f 100%);">
+          <div class="pv-icon">🛰️</div>
+          <div class="pv-title">Oil Slick Verification &amp; Water Quality Monitoring</div>
+          <div class="pv-sub">Satellite-based environmental accountability work</div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-role">Geospatial Intern</div>
+        <h3 class="project-title">Verifying environmental harm — for the courtroom and the community</h3>
+        <div class="cs-row"><span class="cs-label">Challenge</span><span class="cs-value">Polluters rely on the difficulty of proving environmental harm from a distance.</span></div>
+        <div class="cs-row"><span class="cs-label">Role</span><span class="cs-value">Verified satellite-detected oil slicks and assessed data center impacts on local water quality.</span></div>
+        <div class="cs-row"><span class="cs-label">Impact</span><span class="cs-value">Delivered verified evidence supporting litigation cases brought by international NGOs.</span></div>
+      </div>
+    </div>
 
-</p>
+    <div class="project-card" data-cat="cbf">
+      <div class="project-visual">
+        <span class="project-tag">Chesapeake Bay Foundation</span>
+        <img src="images/cbf-shoreline.jpg" alt="Aerial comparison of Dorchester County coastline in 1977 versus 2023 showing erosion" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;">
+      </div>
+      <div class="project-body">
+        <div class="project-role">GIS Intern · May–Aug 2025</div>
+        <h3 class="project-title">Mapping the coastline communities are losing</h3>
+        <div class="cs-row"><span class="cs-label">Challenge</span><span class="cs-value">Coastal communities lacked clear visual evidence of how fast their shoreline was changing.</span></div>
+        <div class="cs-row"><span class="cs-label">Role</span><span class="cs-value">Produced sea level rise projections and shoreline change analysis for Dorchester County, MD.</span></div>
+        <div class="cs-row"><span class="cs-label">Impact</span><span class="cs-value">Quantified 46 years of shoreline erosion and wetland loss projected through 2100.</span></div>
+        <div class="project-links">
+          <a href="DorchesterLandChange_v2.pdf" target="_blank" rel="noopener" class="link-arrow">Sea level map →</a>
+          <a href="DorchesterShorelineChange_v2.pdf" target="_blank" rel="noopener" class="link-arrow">Erosion map →</a>
+        </div>
+      </div>
+    </div>
 
-<div class="buttons">
+    <div class="project-card" data-cat="nasa">
+      <div class="project-visual">
+        <span class="project-tag">NASA DEVELOP</span>
+        <div class="pv-scene" style="background:linear-gradient(150deg,#12100d 0%,#33291a 55%,#12100d 100%);">
+          <div class="pv-icon">🔥</div>
+          <div class="pv-title">Urban Heat Island Assessment</div>
+          <div class="pv-sub">10-year analysis · Baltimore City · Maryland Transit Administration</div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-role">Team Lead · Goddard Space Flight Center · Jan–Mar 2024</div>
+        <h3 class="project-title">Ten years of heat, mapped for Baltimore's transit planners</h3>
+        <div class="cs-row"><span class="cs-label">Challenge</span><span class="cs-value">Transit planners needed a clear picture of where heat risk was concentrated across the city.</span></div>
+        <div class="cs-row"><span class="cs-label">Role</span><span class="cs-value">Led a team analyzing 10 years of satellite land surface temperature data.</span></div>
+        <div class="cs-row"><span class="cs-label">Impact</span><span class="cs-value">Delivered findings to the Maryland Transit Administration to inform heat-resilient transit planning.</span></div>
+      </div>
+    </div>
 
-<a class="btn primary" href="#contact">
+    <div class="project-card" data-cat="conservation">
+      <div class="project-visual">
+        <span class="project-tag">Sacred Roots Herbal Sanctuary</span>
+        <img src="images/sacred-roots-easement.jpg" alt="Aerial map of Sacred Roots Herbal Sanctuary showing proposed conservation easement boundaries" style="width:100%;height:100%;object-fit:cover;object-position:center 25%;">
+      </div>
+      <div class="project-body">
+        <div class="project-role">GIS Support · Shepherdstown, WV · 2026</div>
+        <h3 class="project-title">Sacred Roots Herbal Sanctuary</h3>
+        <div class="cs-row"><span class="cs-label">Challenge</span><span class="cs-value">Sacred Roots Herbal Sanctuary needed a clear proposal showing which acreage would remain protected under easement.</span></div>
+        <div class="cs-row"><span class="cs-label">Role</span><span class="cs-value">Delineated property lines, easement boundaries, and excluded acreage over aerial imagery for a 31.8-acre parcel.</span></div>
+        <div class="cs-row"><span class="cs-label">Impact</span><span class="cs-value">Gave the land trust and property owners a shared visual reference for negotiating the easement terms.</span></div>
+      </div>
+    </div>
 
-Let's Work Together
+  </div>
+</section>
 
-</a>
+<section class="section" id="services" style="background:var(--bg-raise);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <p class="section-label">Services</p>
+  <h2 class="section-title">Engagements built around<br><em>your organization's goals.</em></h2>
+  <p class="section-intro" style="margin-bottom:3rem;">I take on a small number of engagements at a time, bringing the same project management and technical rigor to every one — fully remote, deliverable-based, and scoped to what your organization actually needs.</p>
+  <div class="services-grid">
+    <div class="svc"><div class="svc-num">01</div><h3 class="svc-title">Community GIS &amp; Mapping</h3><p class="svc-desc">Watershed maps, land use analysis, habitat mapping, and sea level rise projections, delivered as clear, presentation-ready materials for decision-makers.</p></div>
+    <div class="svc"><div class="svc-num">02</div><h3 class="svc-title">Remote Sensing &amp; Monitoring</h3><p class="svc-desc">Satellite-based environmental monitoring using Google Earth Engine and ArcGIS Pro — vegetation health, land change, temperature trends, and coastal dynamics.</p></div>
+    <div class="svc"><div class="svc-num">03</div><h3 class="svc-title">Grant Research &amp; Writing</h3><p class="svc-desc">Identifying and pursuing funding for environmental, agricultural, and conservation work across federal programs and private foundations.</p></div>
+    <div class="svc"><div class="svc-num">04</div><h3 class="svc-title">Environmental Storytelling</h3><p class="svc-desc">Turning complex environmental data into StoryMaps, visualizations, and advocacy briefs your organization can use to educate and persuade.</p></div>
+  </div>
+</section>
 
-<a class="btn secondary" href="#work">
+<section class="section" id="about" style="background:var(--bg-raise);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <p class="section-label">About me</p>
+  <h2 class="section-title">Community advocate,<br><em>powered by data.</em></h2>
+  <div class="about-grid">
+    <div>
+      <div class="about-body">
+        <p>I'm Maya Clark — a community advocate and geospatial analyst with a B.S. in Geography and Environmental Planning (Geographic Information Science minor) from Towson University. I believe knowledge is power, and I'm committed to putting environmental data directly into the hands of the local communities it affects most, so they can pursue sustainable solutions on their own terms.</p>
+        <p>My work has spanned nonprofit and government settings alike — from verifying oil spills for international NGOs pursuing litigation and assessing data center impacts on water quality at SkyTruth, to leading a federal research team at NASA's Goddard Space Flight Center, to mapping coastal change for the Chesapeake Bay Foundation. Across each, I've brought leadership, vision, and the follow-through to carry an idea from concept to finished product.</p>
+        <p>That range came together in my own <em>independent research</em>: backed by a $5,000 research grant, I designed, funded, and led a tree canopy equity study in Baltimore City that won a Best Paper award — proof that I can drive a project from first idea to public impact.</p>
+        <p>I also have a personal connection to regenerative agriculture. I'm currently working to leverage environmental tech to benefit Sacred Roots Herbal Sanctuary in Shepherdstown, WV — including helping map a conservation easement on the property — while also developing a grant program to help sustain the farm's work long-term.</p>
+      </div>
+      <div class="about-chips">
+        <span class="chip on">ArcGIS Pro</span><span class="chip on">Google Earth Engine</span><span class="chip">Python</span>
+        <span class="chip">QGIS</span><span class="chip on">ArcGIS StoryMaps</span><span class="chip">Experience Builder</span>
+        <span class="chip">Field Maps</span><span class="chip on">Watershed Analysis</span><span class="chip">Grant Writing</span>
+        <span class="chip">i-Tree</span><span class="chip">Microsoft Suite</span><span class="chip on">Project Management</span>
+        <span class="chip">Community Outreach</span>
+      </div>
+    </div>
+    <div class="cred-list">
+      <div class="award-card"><div class="award-title">B.S. Geography &amp; Environmental Planning · GIS Minor</div><div class="award-meta">Towson University</div></div>
+      <div class="award-card dim"><div class="award-title">Geospatial Intern</div><div class="award-meta">SkyTruth · Environmental monitoring &amp; litigation support</div></div>
+      <div class="award-card dim"><div class="award-title">GIS Intern</div><div class="award-meta">Chesapeake Bay Foundation · May–Aug 2025 · Coastal mapping</div></div>
+      <div class="award-card dim"><div class="award-title">NASA DEVELOP Team Lead</div><div class="award-meta">Goddard Space Flight Center · Jan–Mar 2024 · Urban Heat Island</div></div>
+      <div class="award-card"><div class="award-title">$5,000 CLA Summer Research Grant</div><div class="award-meta">Towson University · 2025 · Urban Canopy Equity in Baltimore</div></div>
+      <div class="award-card dim"><div class="award-title">$250 Best Paper Award</div><div class="award-meta">AAG Mid-Atlantic Division Conference · 2025</div></div>
+    </div>
+  </div>
+</section>
 
-View Selected Work
+<section class="section" id="contact">
+  <div class="contact-wrap">
+    <p class="section-label">Get in touch</p>
+    <p class="contact-big">Let's put your data<br>to work for your <strong>community.</strong></p>
+    <p class="contact-body">I take on a small number of remote engagements at a time — project management, community mapping, grant proposals, and data analysis work. If your organization is pursuing sustainable, community-focused environmental solutions and needs a geospatial partner, let's talk.</p>
+    <div class="clink-list">
+      <a href="mailto:maya.na.clark@gmail.com" class="clink"><span class="clink-icon">✉</span> maya.na.clark@gmail.com</a>
+      <a href="https://linkedin.com/in/maya-nadine-clark--" target="_blank" rel="noopener" class="clink"><span class="clink-icon">in</span> linkedin.com/in/maya-nadine-clark--</a>
+      <a href="https://github.com/mayanclark" target="_blank" rel="noopener" class="clink"><span class="clink-icon">◧</span> github.com/mayanclark</a>
+      <a href="https://storymaps.arcgis.com/stories/3cf9e1414d3642a99772c9f7ba3f2c54" target="_blank" rel="noopener" class="clink"><span class="clink-icon">◎</span> Canopy in Crisis — ArcGIS StoryMap</a>
+    </div>
+  </div>
+</section>
 
-</a>
+<footer>
+  <span>© 2026 Maya Clark · Environmental Project Management &amp; GIS Consulting · mayanclark.github.io</span>
+  <a href="mailto:maya.na.clark@gmail.com">maya.na.clark@gmail.com</a>
+</footer>
 
-</div>
+<script>
+  // coordinate ticker — project site locations, satellite-log style
+  const coords = [
+    ['BALTIMORE, MD','39.2904° N, 76.6122° W','CANOPY STUDY'],
+    ['DORCHESTER CO., MD','38.4351° N, 76.1219° W','SHORELINE CHANGE'],
+    ['SHEPHERDSTOWN, WV','39.4318° N, 77.8919° W','SACRED ROOTS'],
+    ['GODDARD SFC, MD','38.9967° N, 76.8481° W','NASA DEVELOP'],
+    ['WEST AFRICA EEZ','VARIOUS','FISHERIES / CIEL'],
+  ];
+  const track = document.getElementById('tickerTrack');
+  const items = coords.map(c => `<span>◎</span> ${c[0]} — ${c[1]} · ${c[2]}`).join('   /   ');
+  track.innerHTML = items + '   /   ' + items;
 
-<div class="stats">
+  // filter tabs
+  const tabs = document.querySelectorAll('.filter-tab');
+  const cards = document.querySelectorAll('.project-card');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const f = tab.dataset.filter;
+      cards.forEach(card => {
+        card.classList.toggle('hidden', f !== 'all' && card.dataset.cat !== f);
+      });
+    });
+  });
+</script>
 
-<div class="stat">
-
-<h3>20+</h3>
-
-<p>Environmental projects completed across conservation, research, and public-sector partnerships.</p>
-
-</div>
-
-<div class="stat">
-
-<h3>NASA</h3>
-
-<p>Team Lead coordinating interdisciplinary research and stakeholder communication.</p>
-
-</div>
-
-<div class="stat">
-
-<h3>$5,000</h3>
-
-<p>Competitive research grant awarded for environmental justice and urban tree canopy research.</p>
-
-</div>
-
-<div class="stat">
-
-<h3>Mission Driven</h3>
-
-<p>Supporting organizations working toward healthier ecosystems and stronger communities.</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</header>
+</body>
+</html>
